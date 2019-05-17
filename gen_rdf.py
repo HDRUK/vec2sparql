@@ -2,6 +2,12 @@
 
 EXP_CODES = set(['EXP', 'IDA', 'IPI', 'IMP', 'IGI', 'IEP', 'TAS', 'IC'])
 
+# introducing single access poing for changes - quick hack - global variables
+bio2vec_baseurl         = 'http://localhost' # 'http://bio2vec.net'
+data_target_dir         = './data/'
+data_source_dir         = '../data_in/'
+feature_vector_filename = 'feature_vectors.csv'
+
 def main():
     rdf_images()
 
@@ -23,16 +29,16 @@ def mapping():
     w.close()
 
 def rdf_images():
-    w = open('data/graph_patients.ttl', 'w')
+    w = open('{}/graph_patients.ttl'.format(data_target_dir), 'w')
     w.write('@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n')
     w.write('@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .\n')
-    w.write('@prefix BVP: <http://bio2vec.net/patients/BVP_> .\n')
-    w.write('@prefix IMG: <http://bio2vec.net/patients/IMG_> .\n')
-    w.write('@prefix BV: <http://bio2vec.net/patients/> .\n')
+    w.write('@prefix BVP: <{}/patients/BVP_> .\n'.format(bio2vec_baseurl))
+    w.write('@prefix IMG: <{}/patients/IMG_> .\n'.format(bio2vec_baseurl))
+    w.write('@prefix BV: <{}/patients/> .\n'.format(bio2vec_baseurl))
 
-    e = open('data/patients_embeddings.txt', 'w')
+    e = open('{}/patients_embeddings.txt'.format(data_target_dir), 'w')
     
-    with open('data/patients.csv') as f:
+    with open('{}/images/{}'.format(data_source_dir,feature_vector_filename)) as f:
         next(f)
         for line in f:
             it = line.strip().split(',')
@@ -46,7 +52,7 @@ def rdf_images():
             w.write(img_id + ' BV:view_position "' + it[6] + '" .\n')
             embeds = ','.join(it[7:])[1:-1].replace(', ', '\t')
             e.write(
-                'http://bio2vec.net/patients/IMG_{}'.format(it[0]) +
+                'http://{}/patients/IMG_{}'.format(bio2vec_baseurl,it[0]) +
                 '\t' + embeds + '\n')
     w.close()
     e.close()
