@@ -7,7 +7,6 @@ version: "3"
 #
 # Currently defined are:
 # ${DATADIR} - the data directory where the underlying data can be found
-# ${FRONTENDPORT} - outside port for the frontend
 # ${BACKENDPORT}  - outside port for the backend
 # ${ELASTICPORT}  - outside port for the elastic search
 
@@ -27,7 +26,7 @@ services:
   backend:
     build: .
     volumes:
-      - ${DATADIR}:/data/
+      - ${DATADIR}/:/data/
     networks:
       - net 
     logging:
