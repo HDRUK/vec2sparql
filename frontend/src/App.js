@@ -3,6 +3,8 @@ import logo from './logo_small.png';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+let bio2vec_baseurl = 'http://localhost:3330' # ak new
+
 class App extends Component {
 
     constructor(props) {
@@ -20,7 +22,7 @@ class App extends Component {
     }
     
     handleExample1Click(event) {
-	var query = 'PREFIX b2v: <http://bio2vec.net/graph_embeddings/function#>\n' +
+	var query = 'PREFIX b2v: <'+bio2vec_baseurl+'/graph_embeddings/function#>\n' +
 	    'PREFIX MGI: <http://www.informatics.jax.org/gene/MGI_>\n' +
 	    'PREFIX obo: <http://purl.obolibrary.org/>\n' +
 	    'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n' +
@@ -35,7 +37,7 @@ class App extends Component {
     }
 
     handleExample2Click(event) {
-	var query = 'PREFIX b2v: <http://bio2vec.net/graph_embeddings/function#>\n' +
+	var query = 'PREFIX b2v: <'+bio2vec_baseurl+'/graph_embeddings/function#>\n' +
 	    'PREFIX MGI: <http://www.informatics.jax.org/gene/MGI_>\n' +
 	    'PREFIX obo: <http://purl.obolibrary.org/>\n' +
 	    'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n' +
@@ -49,10 +51,10 @@ class App extends Component {
     }
 
     handleExample3Click(event) {
-	var query = 'PREFIX b2v: <http://bio2vec.net/patient_embeddings/function#>\n' +
-	    'PREFIX BVP: <http://bio2vec.net/patients/BVP_>\n' + 
-	    'PREFIX IMG: <http://bio2vec.net/patients/IMG_>\n' +
-	    'PREFIX BV: <http://bio2vec.net/patients/>\n' +
+	var query = 'PREFIX b2v: <'+bio2vec_baseurl+'/patient_embeddings/function#>\n' +
+	    'PREFIX BVP: <'+bio2vec_baseurl+'/patients/BVP_>\n' + 
+	    'PREFIX IMG: <'+bio2vec_baseurl+'/patients/IMG_>\n' +
+	    'PREFIX BV: <'+bio2vec_baseurl+'/patients/>\n' +
 	    'SELECT ?sim (b2v:similarity(?sim, IMG:00009890_001.png) as ?val) ?p ?f\n' +
 	    '{\n' +
 	    ' ?sim b2v:mostSimilar(IMG:00009890_001.png 10) .\n' +
