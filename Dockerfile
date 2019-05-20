@@ -9,8 +9,8 @@ WORKDIR /tmp
 COPY . .
 
 RUN ./gradlew assembleDist && \
-  unzip build/distributions/sparqlvec.zip -d /app/ && \
-  rm -rf *
+  unzip build/distributions/sparqlvec.zip -d /app/ # && \
+  #rm -rf *
 
 ENV PATH="/app/sparqlvec/bin:${PATH}"
 

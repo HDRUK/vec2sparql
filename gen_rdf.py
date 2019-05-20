@@ -3,7 +3,7 @@
 EXP_CODES = set(['EXP', 'IDA', 'IPI', 'IMP', 'IGI', 'IEP', 'TAS', 'IC'])
 
 # introducing single access poing for changes - quick hack - global variables
-bio2vec_baseurl         = 'http://localhost' # 'http://bio2vec.net'
+bio2vec_baseurl         = 'http://localhost:3030' # 'http://bio2vec.net'
 data_target_dir         = './data/'
 data_source_dir         = '../data_in/'
 feature_vector_filename = 'feature_vectors.csv'
